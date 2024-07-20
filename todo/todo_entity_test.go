@@ -7,7 +7,6 @@ import (
 	"github.com/google/uuid"
 )
 
-// The TODO application can show the LIST of tasks with the following requirements
 // Can sort the data by Title or Date or Status fields
 // Can search the data by Title or Description fields
 // The TODO application can UPDATE a task with the following requirements
