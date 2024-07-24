@@ -25,7 +25,7 @@ func NewCreateTodoUseCase(repository TodoRepository) CreateTodoUseCase {
 	return CreateTodoUseCase{repository: repository}
 }
 
-func (usecase CreateTodoUseCase) Execute(request CreateTodoRequest) (error, Todo) {
+func (usecase CreateTodoUseCase) Execute(request CreateTodoRequest) (Todo, error) {
 	parsedTime, _ := time.Parse(time.RFC3339, request.CreatedAt)
 	todo, err := NewTodo(
 		request.Id,
@@ -36,10 +36,10 @@ func (usecase CreateTodoUseCase) Execute(request CreateTodoRequest) (error, Todo
 		request.Status,
 	)
 	if err != nil {
-		return err, Todo{}
+		return Todo{}, err
 	}
 	createdTodo := usecase.repository.Save(todo)
-	return nil, createdTodo
+	return createdTodo, nil
 }
 
 func TestCreateTodoUseCase(t *testing.T) {
@@ -69,7 +69,7 @@ func TestCreateTodoUseCase(t *testing.T) {
 
 		useCase := NewCreateTodoUseCase(&repository)
 
-		err, got := useCase.Execute(request)
+		got, err := useCase.Execute(request)
 
 		if err != nil {
 			t.Errorf("Error while creating todo: %v", err)
@@ -96,7 +96,7 @@ func TestCreateTodoUseCase(t *testing.T) {
 
 		useCase := NewCreateTodoUseCase(&repository)
 
-		err, _ := useCase.Execute(request)
+		_, err := useCase.Execute(request)
 
 		if err == nil {
 			t.Error("Error should be returned when creating todo with invalid id")
