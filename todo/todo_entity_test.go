@@ -13,6 +13,16 @@ import (
 // Can update a task by ID field
 // Can update Title, Description, Date, Image, and Status fields corresponding to the requirements from the CREATE feature
 
+func assertGotWant(t *testing.T, err error, want string) {
+	t.Helper()
+	if err == nil {
+		t.Fatalf("expected error, got nil")
+	}
+	got := err.Error()
+	if got != want {
+		t.Errorf("got %q, want %q", got, want)
+	}
+}
 func TestTodoEntity(t *testing.T) {
 	t.Run("Id must be required", func(t *testing.T) {
 		want := "id cannot be empty"
@@ -25,13 +35,7 @@ func TestTodoEntity(t *testing.T) {
 			IN_PROGRESS,
 		)
 
-		if err == nil {
-			t.Error("expected error, got nil")
-		}
-		got := err.Error()
-		if got != want {
-			t.Errorf("got %q, want %q", got, want)
-		}
+		assertGotWant(t, err, want)
 	})
 	t.Run("Id must be UUID format", func(t *testing.T) {
 		want := "id must be UUID format"
@@ -44,13 +48,7 @@ func TestTodoEntity(t *testing.T) {
 			IN_PROGRESS,
 		)
 
-		if err == nil {
-			t.Error("expected error, got nil")
-		}
-		got := err.Error()
-		if got != want {
-			t.Errorf("got %q, want %q", got, want)
-		}
+		assertGotWant(t, err, want)
 	})
 	t.Run("CreatedAt must be required", func(t *testing.T) {
 		want := "created_at cannot be empty"
@@ -63,13 +61,7 @@ func TestTodoEntity(t *testing.T) {
 			IN_PROGRESS,
 		)
 
-		if err == nil {
-			t.Error("expected error, got nil")
-		}
-		got := err.Error()
-		if got != want {
-			t.Errorf("got %q, want %q", got, want)
-		}
+		assertGotWant(t, err, want)
 	})
 	t.Run("CreatedAt must be RFC3339 format", func(t *testing.T) {
 		want := "created_at must be RFC3339 format"
@@ -82,13 +74,7 @@ func TestTodoEntity(t *testing.T) {
 			IN_PROGRESS,
 		)
 
-		if err == nil {
-			t.Error("expected error, got nil")
-		}
-		got := err.Error()
-		if got != want {
-			t.Errorf("got %q, want %q", got, want)
-		}
+		assertGotWant(t, err, want)
 	})
 	t.Run("Todo title cannot be empty", func(t *testing.T) {
 		want := "title cannot be empty"
@@ -102,14 +88,7 @@ func TestTodoEntity(t *testing.T) {
 			IN_PROGRESS,
 		)
 
-		if err == nil {
-			t.Error("expected error, got nil")
-		}
-		got := err.Error()
-
-		if got != want {
-			t.Errorf("got %q, want %q", got, want)
-		}
+		assertGotWant(t, err, want)
 	})
 	t.Run("Todo status cannot be empty", func(t *testing.T) {
 		want := "status cannot be empty"
@@ -123,14 +102,7 @@ func TestTodoEntity(t *testing.T) {
 			"",
 		)
 
-		if err == nil {
-			t.Error("expected error, got nil")
-		}
-		got := err.Error()
-
-		if got != want {
-			t.Errorf("got %q, want %q", got, want)
-		}
+		assertGotWant(t, err, want)
 	})
 	t.Run("Todo status must be IN_PROGRESS or COMPLETE", func(t *testing.T) {
 		want := "status must be IN_PROGRESS or COMPLETE"
@@ -144,14 +116,7 @@ func TestTodoEntity(t *testing.T) {
 			"__INVALID_STATUS__",
 		)
 
-		if err == nil {
-			t.Error("expected error, got nil")
-		}
-		got := err.Error()
-
-		if got != want {
-			t.Errorf("got %q, want %q", got, want)
-		}
+		assertGotWant(t, err, want)
 	})
 	t.Run("Todo title must less than 100 characters", func(t *testing.T) {
 		want := "title must not over 100 characters"
@@ -165,14 +130,7 @@ func TestTodoEntity(t *testing.T) {
 			IN_PROGRESS,
 		)
 
-		if err == nil {
-			t.Error("expected error, got nil")
-		}
-		got := err.Error()
-
-		if got != want {
-			t.Errorf("got %q, want %q", got, want)
-		}
+		assertGotWant(t, err, want)
 	})
 	t.Run("Image must be Base64 Encode format", func(t *testing.T) {
 		want := "image must be Base64 Encode format"
@@ -186,13 +144,6 @@ func TestTodoEntity(t *testing.T) {
 			IN_PROGRESS,
 		)
 
-		if err == nil {
-			t.Error("expected error, got nil")
-		}
-		got := err.Error()
-
-		if got != want {
-			t.Errorf("got %q, want %q", got, want)
-		}
+		assertGotWant(t, err, want)
 	})
 }
