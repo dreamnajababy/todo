@@ -12,12 +12,12 @@ import (
 	"github.com/google/uuid"
 )
 
-func CreateTestTodoData(title string, date string, status Status) Todo {
+func CreateTestTodoData(title string, date string, description string, status Status) Todo {
 	parsedDate, _ := time.Parse(time.RFC3339, date)
 	todo, _ := NewTodo(
 		uuid.New().String(),
 		title,
-		"__TEST_DESCRIPTION__",
+		description,
 		parsedDate.Format(time.RFC3339),
 		base64.StdEncoding.EncodeToString([]byte("__TEST_IMAGE_URL__")),
 		status,
@@ -34,10 +34,12 @@ func TestHTTPGetTodoList(t *testing.T) {
 			todos: []Todo{CreateTestTodoData(
 				"__TEST_TITLE__",
 				time.Now().UTC().Format(time.RFC3339),
+				"__TEST_DESCRIPTION__",
 				IN_PROGRESS,
 			), CreateTestTodoData(
 				"__TEST_TITLE__",
 				time.Now().UTC().Format(time.RFC3339),
+				"__TEST_DESCRIPTION__",
 				IN_PROGRESS,
 			)},
 		}

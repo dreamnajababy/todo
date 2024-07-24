@@ -6,7 +6,6 @@ import (
 	"time"
 )
 
-// Can search the data by Title or Description fields
 // The TODO application can UPDATE a task with the following requirements
 // Can update a task by ID field
 // Can update Title, Description, Date, Image, and Status fields corresponding to the requirements from the CREATE feature
@@ -17,11 +16,13 @@ func TestGetTodoListUseCase(t *testing.T) {
 		firstTodo := CreateTestTodoData(
 			"__TEST_TITLE_1__",
 			time.Now().UTC().Format(time.RFC3339),
+			"__TEST_DESCRIPTION__",
 			IN_PROGRESS,
 		)
 		secondTodo := CreateTestTodoData(
 			"__TEST_TITLE_2__",
 			time.Now().UTC().Format(time.RFC3339),
+			"__TEST_DESCRIPTION__",
 			IN_PROGRESS,
 		)
 		repository := InMemoryTodoRepository{
@@ -51,11 +52,13 @@ func TestGetTodoListUseCase(t *testing.T) {
 		firstTodo := CreateTestTodoData(
 			"__TEST_TITLE_1__",
 			time.Now().UTC().Format(time.RFC3339),
+			"__TEST_DESCRIPTION__",
 			IN_PROGRESS,
 		)
 		secondTodo := CreateTestTodoData(
 			"__TEST_TITLE_2__",
 			time.Now().UTC().Format(time.RFC3339),
+			"__TEST_DESCRIPTION__",
 			IN_PROGRESS,
 		)
 		repository := InMemoryTodoRepository{
@@ -86,11 +89,13 @@ func TestGetTodoListUseCase(t *testing.T) {
 		firstTodo := CreateTestTodoData(
 			"__TEST_TITLE__",
 			"2018-01-16T05:15:37Z",
+			"__TEST_DESCRIPTION__",
 			IN_PROGRESS,
 		)
 		secondTodo := CreateTestTodoData(
 			"__TEST_TITLE__",
 			"2018-02-16T05:15:37Z",
+			"__TEST_DESCRIPTION__",
 			IN_PROGRESS,
 		)
 		repository := InMemoryTodoRepository{
@@ -120,11 +125,13 @@ func TestGetTodoListUseCase(t *testing.T) {
 		firstTodo := CreateTestTodoData(
 			"__TEST_TITLE__",
 			"2018-01-16T05:15:37Z",
+			"__TEST_DESCRIPTION__",
 			IN_PROGRESS,
 		)
 		secondTodo := CreateTestTodoData(
 			"__TEST_TITLE__",
 			"2018-02-16T05:15:37Z",
+			"__TEST_DESCRIPTION__",
 			IN_PROGRESS,
 		)
 		repository := InMemoryTodoRepository{
@@ -154,11 +161,13 @@ func TestGetTodoListUseCase(t *testing.T) {
 		firstTodo := CreateTestTodoData(
 			"__TEST_TITLE__",
 			"2018-02-16T05:15:37Z",
+			"__TEST_DESCRIPTION__",
 			IN_PROGRESS,
 		)
 		secondTodo := CreateTestTodoData(
 			"__TEST_TITLE__",
 			"2018-02-16T05:15:37Z",
+			"__TEST_DESCRIPTION__",
 			COMPLETE,
 		)
 		repository := InMemoryTodoRepository{
@@ -188,11 +197,13 @@ func TestGetTodoListUseCase(t *testing.T) {
 		firstTodo := CreateTestTodoData(
 			"__TEST_TITLE__",
 			"2018-02-16T05:15:37Z",
+			"__TEST_DESCRIPTION__",
 			IN_PROGRESS,
 		)
 		secondTodo := CreateTestTodoData(
 			"__TEST_TITLE__",
 			"2018-02-16T05:15:37Z",
+			"__TEST_DESCRIPTION__",
 			COMPLETE,
 		)
 		repository := InMemoryTodoRepository{
@@ -224,11 +235,13 @@ func TestGetTodoListUseCase(t *testing.T) {
 				CreateTestTodoData(
 					"__TEST_TITLE__",
 					time.Now().UTC().Format(time.RFC3339),
+					"__TEST_DESCRIPTION__",
 					IN_PROGRESS,
 				),
 				CreateTestTodoData(
 					"__TEST_TITLE__",
 					time.Now().UTC().Format(time.RFC3339),
+					"__TEST_DESCRIPTION__",
 					IN_PROGRESS,
 				),
 			},
