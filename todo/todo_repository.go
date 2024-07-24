@@ -13,7 +13,7 @@ func (r InMemoryTodoRepository) GetTodoList() []Todo {
 	return r.todos
 }
 
-func (r InMemoryTodoRepository) Save(todo Todo) Todo {
+func (r *InMemoryTodoRepository) Save(todo Todo) Todo {
 	r.todos = append(r.todos, todo)
 	return todo
 }
