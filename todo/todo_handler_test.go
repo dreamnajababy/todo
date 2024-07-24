@@ -13,7 +13,7 @@ import (
 )
 
 func CreateTestTodoData(title string, date string, status Status) Todo {
-	parsedDate, _ := time.Parse(date, time.RFC3339)
+	parsedDate, _ := time.Parse(time.RFC3339, date)
 	todo, _ := NewTodo(
 		uuid.New().String(),
 		title,

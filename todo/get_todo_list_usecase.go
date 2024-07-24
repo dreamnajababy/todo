@@ -9,9 +9,9 @@ type GetTodoListUseCase struct {
 }
 
 const (
-	TITLE  TodoSortedColumn = "Title"
-	DATE   TodoSortedColumn = "Date"
-	STATUS TodoSortedColumn = "Status"
+	TITLE      TodoSortedColumn = "Title"
+	CREATED_AT TodoSortedColumn = "Date"
+	STATUS     TodoSortedColumn = "Status"
 )
 const (
 	ASC  OrderBy = "ASC"
@@ -39,12 +39,14 @@ func (usecase GetTodoListUseCase) Execute(request GetTodoListRequest) []Todo {
 		sort.Sort(ByTitleAsc(todos))
 	case request.columns[TITLE] == DESC:
 		sort.Sort(ByTitleDesc(todos))
-	case request.columns[DATE] == ASC:
+	case request.columns[CREATED_AT] == ASC:
 		sort.Sort(ByCreatedAtAsc(todos))
-	case request.columns[DATE] == DESC:
+	case request.columns[CREATED_AT] == DESC:
 		sort.Sort(ByCreatedAtDesc(todos))
 	case request.columns[STATUS] == ASC:
 		sort.Sort(ByStatusAsc(todos))
+	case request.columns[STATUS] == DESC:
+		sort.Sort(ByStatusDesc(todos))
 	}
 	return todos
 }
