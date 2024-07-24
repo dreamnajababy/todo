@@ -8,6 +8,6 @@ type InMemoryTodoRepository struct {
 	todos []Todo
 }
 
-func (r *InMemoryTodoRepository) GetTodoList() []Todo {
+func (r InMemoryTodoRepository) GetTodoList() []Todo {
 	return r.todos
 }

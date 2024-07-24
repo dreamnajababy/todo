@@ -9,12 +9,6 @@ import (
 	"github.com/google/uuid"
 )
 
-// Can sort the data by Title or Date or Status fields
-// Can search the data by Title or Description fields
-// The TODO application can UPDATE a task with the following requirements
-// Can update a task by ID field
-// Can update Title, Description, Date, Image, and Status fields corresponding to the requirements from the CREATE feature
-
 func assertGotWant(t *testing.T, err error, want string) {
 	t.Helper()
 	if err == nil {
