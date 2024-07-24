@@ -83,7 +83,7 @@ func TestSearchTodoUseCase(t *testing.T) {
 				secondTodo,
 			},
 		}
-		useCase := NewSearchTodoUseCase(repository)
+		useCase := NewSearchTodoUseCase(&repository)
 		got := useCase.Execute(request)
 
 		if !reflect.DeepEqual(got, want) {
