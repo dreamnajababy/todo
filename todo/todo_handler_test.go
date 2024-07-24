@@ -12,14 +12,15 @@ import (
 	"github.com/google/uuid"
 )
 
-func CreateTestTodoData() Todo {
+func CreateTestTodoData(title string, date string, status Status) Todo {
+	parsedDate, _ := time.Parse(date, time.RFC3339)
 	todo, _ := NewTodo(
 		uuid.New().String(),
-		"__TEST_TITLE__",
+		title,
 		"__TEST_DESCRIPTION__",
-		time.Now().UTC().Format(time.RFC3339),
+		parsedDate.Format(time.RFC3339),
 		base64.StdEncoding.EncodeToString([]byte("__TEST_IMAGE_URL__")),
-		IN_PROGRESS,
+		status,
 	)
 	return todo
 }
@@ -30,7 +31,15 @@ func TestHTTPGetTodoList(t *testing.T) {
 		request, _ := http.NewRequest(http.MethodGet, "/todos", nil)
 		response := httptest.NewRecorder()
 		repository := InMemoryTodoRepository{
-			todos: []Todo{CreateTestTodoData(), CreateTestTodoData()},
+			todos: []Todo{CreateTestTodoData(
+				"__TEST_TITLE__",
+				time.Now().UTC().Format(time.RFC3339),
+				IN_PROGRESS,
+			), CreateTestTodoData(
+				"__TEST_TITLE__",
+				time.Now().UTC().Format(time.RFC3339),
+				IN_PROGRESS,
+			)},
 		}
 		useCase := NewGetTodoListUseCase(&repository)
 		want := repository.GetTodoList()

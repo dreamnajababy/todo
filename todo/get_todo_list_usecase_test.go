@@ -3,6 +3,7 @@ package todo
 import (
 	"reflect"
 	"testing"
+	"time"
 )
 
 // Can sort the data by Title or Date or Status fields
@@ -14,10 +15,20 @@ import (
 func TestGetTodoListUseCase(t *testing.T) {
 	t.Run("Return sorted todo list by title with ascending", func(t *testing.T) {
 		// arrange
+		firstTodo := CreateTestTodoData(
+			"__TEST_TITLE_1__",
+			time.Now().UTC().Format(time.RFC3339),
+			IN_PROGRESS,
+		)
+		secondTodo := CreateTestTodoData(
+			"__TEST_TITLE_2__",
+			time.Now().UTC().Format(time.RFC3339),
+			IN_PROGRESS,
+		)
 		repository := InMemoryTodoRepository{
 			todos: []Todo{
-				CreateTestTodoData(),
-				CreateTestTodoData(),
+				secondTodo,
+				firstTodo,
 			},
 		}
 		request := GetTodoListRequest{
@@ -25,7 +36,7 @@ func TestGetTodoListUseCase(t *testing.T) {
 				TITLE: ASC,
 			},
 		}
-		want := repository.GetTodoList()
+		want := []Todo{firstTodo, secondTodo}
 		useCase := NewGetTodoListUseCase(&repository)
 
 		// act
@@ -40,8 +51,16 @@ func TestGetTodoListUseCase(t *testing.T) {
 		// arrange
 		repository := InMemoryTodoRepository{
 			todos: []Todo{
-				CreateTestTodoData(),
-				CreateTestTodoData(),
+				CreateTestTodoData(
+					"__TEST_TITLE__",
+					time.Now().UTC().Format(time.RFC3339),
+					IN_PROGRESS,
+				),
+				CreateTestTodoData(
+					"__TEST_TITLE__",
+					time.Now().UTC().Format(time.RFC3339),
+					IN_PROGRESS,
+				),
 			},
 		}
 		request := GetTodoListRequest{}

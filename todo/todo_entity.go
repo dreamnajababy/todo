@@ -24,6 +24,42 @@ type Todo struct {
 	Status      Status
 }
 
+type ByTitleAsc []Todo
+
+func (a ByTitleAsc) Len() int           { return len(a) }
+func (a ByTitleAsc) Less(i, j int) bool { return a[i].Title < a[j].Title }
+func (a ByTitleAsc) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+
+type ByTitleDesc []Todo
+
+func (a ByTitleDesc) Len() int           { return len(a) }
+func (a ByTitleDesc) Less(i, j int) bool { return a[i].Title > a[j].Title }
+func (a ByTitleDesc) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+
+type ByCreatedAtAsc []Todo
+
+func (a ByCreatedAtAsc) Len() int           { return len(a) }
+func (a ByCreatedAtAsc) Less(i, j int) bool { return a[i].CreatedAt.Compare(a[j].CreatedAt) < 0 }
+func (a ByCreatedAtAsc) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+
+type ByCreatedAtDesc []Todo
+
+func (a ByCreatedAtDesc) Len() int           { return len(a) }
+func (a ByCreatedAtDesc) Less(i, j int) bool { return a[i].CreatedAt.Compare(a[j].CreatedAt) > 0 }
+func (a ByCreatedAtDesc) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+
+type ByStatusAsc []Todo
+
+func (a ByStatusAsc) Len() int           { return len(a) }
+func (a ByStatusAsc) Less(i, j int) bool { return a[i].Status < a[j].Status }
+func (a ByStatusAsc) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+
+type ByStatusDesc []Todo
+
+func (a ByStatusDesc) Len() int           { return len(a) }
+func (a ByStatusDesc) Less(i, j int) bool { return a[i].Status > a[j].Status }
+func (a ByStatusDesc) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+
 func NewTodo(id string, title, description string, createdAt string, image string, status Status) (Todo, error) {
 	if id == "" {
 		return Todo{}, errors.New("id cannot be empty")
