@@ -24,38 +24,38 @@ type Todo struct {
 	Status      Status
 }
 
-func NewTodo(id string, title, description string, createdAt string, image string, status Status) (*Todo, error) {
+func NewTodo(id string, title, description string, createdAt string, image string, status Status) (Todo, error) {
 	if id == "" {
-		return nil, errors.New("id cannot be empty")
+		return Todo{}, errors.New("id cannot be empty")
 	}
 	uuid, uuidErr := uuid.Parse(id)
 	if uuidErr != nil {
-		return nil, errors.New("id must be UUID format")
+		return Todo{}, errors.New("id must be UUID format")
 	}
 	if title == "" {
-		return nil, errors.New("title cannot be empty")
+		return Todo{}, errors.New("title cannot be empty")
 	}
 	if createdAt == "" {
-		return nil, errors.New("created_at cannot be empty")
+		return Todo{}, errors.New("created_at cannot be empty")
 	}
 	if status == "" {
-		return nil, errors.New("status cannot be empty")
+		return Todo{}, errors.New("status cannot be empty")
 	}
 	if status != IN_PROGRESS && status != COMPLETE {
-		return nil, errors.New("status must be IN_PROGRESS or COMPLETE")
+		return Todo{}, errors.New("status must be IN_PROGRESS or COMPLETE")
 	}
 	parsedCreatedAt, isRFC3339 := time.Parse(time.RFC3339, createdAt)
 	if isRFC3339 != nil {
-		return nil, errors.New("created_at must be RFC3339 format")
+		return Todo{}, errors.New("created_at must be RFC3339 format")
 	}
 	if len(title) > 100 {
-		return nil, errors.New("title must not over 100 characters")
+		return Todo{}, errors.New("title must not over 100 characters")
 	}
 	_, base64Err := base64.StdEncoding.DecodeString(image)
 	if base64Err != nil {
-		return nil, errors.New("image must be Base64 Encode format")
+		return Todo{}, errors.New("image must be Base64 Encode format")
 	}
-	return &Todo{
+	return Todo{
 		Id:          uuid,
 		Title:       title,
 		Description: description,

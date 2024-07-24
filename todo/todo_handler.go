@@ -6,9 +6,9 @@ import (
 )
 
 // TODO: Change dependency to be usecase instead of repository and group according to the module handler
-func PrepareTodoHandler(todoRepository TodoRepository) func(w http.ResponseWriter, r *http.Request) {
+func PrepareTodoHandler(getTodoListUseCase GetTodoListUseCase) func(w http.ResponseWriter, r *http.Request) {
 	getTodoHandler := func(w http.ResponseWriter, r *http.Request) {
-		todos := todoRepository.GetTodoList()
+		todos := getTodoListUseCase.Execute()
 		json.NewEncoder(w).Encode(todos)
 		w.WriteHeader(http.StatusOK)
 	}

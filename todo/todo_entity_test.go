@@ -1,6 +1,8 @@
 package todo
 
 import (
+	"encoding/base64"
+	"reflect"
 	"testing"
 	"time"
 
@@ -24,6 +26,30 @@ func assertGotWant(t *testing.T, err error, want string) {
 	}
 }
 func TestTodoEntity(t *testing.T) {
+	t.Run("Create new todo successfully", func(t *testing.T) {
+		createdAt := time.Date(2023, time.January, 1, 0, 0, 0, 0, time.UTC)
+		imageUrl := base64.StdEncoding.EncodeToString([]byte("__TEST_IMAGE_URL__"))
+		want := Todo{
+			Id:          uuid.New(),
+			Title:       "__TEST_TITLE__",
+			Description: "__TEST_DESCRIPTION__",
+			CreatedAt:   createdAt,
+			Image:       imageUrl,
+			Status:      IN_PROGRESS,
+		}
+		got, _ := NewTodo(
+			want.Id.String(),
+			want.Title,
+			want.Description,
+			want.CreatedAt.Format(time.RFC3339),
+			want.Image,
+			want.Status,
+		)
+
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got %v want %v", got, want)
+		}
+	})
 	t.Run("Id must be required", func(t *testing.T) {
 		want := "id cannot be empty"
 		_, err := NewTodo(
