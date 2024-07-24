@@ -6,10 +6,6 @@ import (
 	"time"
 )
 
-// The TODO application can UPDATE a task with the following requirements
-// Can update a task by ID field
-// Can update Title, Description, Date, Image, and Status fields corresponding to the requirements from the CREATE feature
-
 func TestGetTodoListUseCase(t *testing.T) {
 	t.Run("Return sorted todo list by title with ascending", func(t *testing.T) {
 		// arrange
