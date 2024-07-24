@@ -28,7 +28,7 @@ func TestGetTodoListUseCase(t *testing.T) {
 			},
 		}
 		request := GetTodoListRequest{
-			columns: map[TodoSortedColumn]OrderBy{
+			sortableColumns: map[TodoSortedColumn]OrderBy{
 				TITLE: ASC,
 			},
 		}
@@ -64,7 +64,7 @@ func TestGetTodoListUseCase(t *testing.T) {
 			},
 		}
 		request := GetTodoListRequest{
-			columns: map[TodoSortedColumn]OrderBy{
+			sortableColumns: map[TodoSortedColumn]OrderBy{
 				TITLE: DESC,
 			},
 		}
@@ -101,7 +101,7 @@ func TestGetTodoListUseCase(t *testing.T) {
 			},
 		}
 		request := GetTodoListRequest{
-			columns: map[TodoSortedColumn]OrderBy{
+			sortableColumns: map[TodoSortedColumn]OrderBy{
 				CREATED_AT: ASC,
 			},
 		}
@@ -137,7 +137,7 @@ func TestGetTodoListUseCase(t *testing.T) {
 			},
 		}
 		request := GetTodoListRequest{
-			columns: map[TodoSortedColumn]OrderBy{
+			sortableColumns: map[TodoSortedColumn]OrderBy{
 				CREATED_AT: DESC,
 			},
 		}
@@ -173,7 +173,7 @@ func TestGetTodoListUseCase(t *testing.T) {
 			},
 		}
 		request := GetTodoListRequest{
-			columns: map[TodoSortedColumn]OrderBy{
+			sortableColumns: map[TodoSortedColumn]OrderBy{
 				STATUS: ASC,
 			},
 		}
@@ -209,7 +209,7 @@ func TestGetTodoListUseCase(t *testing.T) {
 			},
 		}
 		request := GetTodoListRequest{
-			columns: map[TodoSortedColumn]OrderBy{
+			sortableColumns: map[TodoSortedColumn]OrderBy{
 				STATUS: DESC,
 			},
 		}
@@ -243,7 +243,7 @@ func TestGetTodoListUseCase(t *testing.T) {
 			},
 		}
 		request := GetTodoListRequest{}
-		want := repository.GetTodoList()
+		want := repository.GetTodoList(map[TodoSortedColumn]OrderBy{})
 		useCase := NewGetTodoListUseCase(&repository)
 
 		// act

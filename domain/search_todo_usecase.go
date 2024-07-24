@@ -36,7 +36,7 @@ func (usecase SearchTodoUseCase) searchByDescription(todos []Todo, result []Todo
 }
 
 func (usecase SearchTodoUseCase) Execute(request SearchTodoRequest) []Todo {
-	todos := usecase.repository.GetTodoList()
+	todos := usecase.repository.GetTodoList(map[TodoSortedColumn]OrderBy{})
 	var result []Todo
 	for _, column := range request.columns {
 		switch column {

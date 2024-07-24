@@ -1,9 +1,5 @@
 package domain
 
-import (
-	"sort"
-)
-
 type GetTodoListUseCase struct {
 	todoRepository TodoRepository
 }
@@ -22,7 +18,7 @@ type TodoSortedColumn string
 type OrderBy string
 
 type GetTodoListRequest struct {
-	columns map[TodoSortedColumn]OrderBy
+	sortableColumns map[TodoSortedColumn]OrderBy
 }
 
 func thereIsNo(columns map[TodoSortedColumn]OrderBy) bool {
@@ -30,25 +26,10 @@ func thereIsNo(columns map[TodoSortedColumn]OrderBy) bool {
 }
 
 func (usecase GetTodoListUseCase) Execute(request GetTodoListRequest) []Todo {
-	if thereIsNo(request.columns) {
-		return usecase.todoRepository.GetTodoList()
+	if thereIsNo(request.sortableColumns) {
+		return usecase.todoRepository.GetTodoList(request.sortableColumns)
 	}
-	todos := usecase.todoRepository.GetTodoList()
-	switch {
-	case request.columns[TITLE] == ASC:
-		sort.Sort(ByTitleAsc(todos))
-	case request.columns[TITLE] == DESC:
-		sort.Sort(ByTitleDesc(todos))
-	case request.columns[CREATED_AT] == ASC:
-		sort.Sort(ByCreatedAtAsc(todos))
-	case request.columns[CREATED_AT] == DESC:
-		sort.Sort(ByCreatedAtDesc(todos))
-	case request.columns[STATUS] == ASC:
-		sort.Sort(ByStatusAsc(todos))
-	case request.columns[STATUS] == DESC:
-		sort.Sort(ByStatusDesc(todos))
-	}
-	return todos
+	return usecase.todoRepository.GetTodoList(request.sortableColumns)
 }
 
 func NewGetTodoListUseCase(todoRepository TodoRepository) GetTodoListUseCase {

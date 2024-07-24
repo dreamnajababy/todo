@@ -44,7 +44,7 @@ func TestHTTPGetTodoList(t *testing.T) {
 			)},
 		}
 		useCase := NewGetTodoListUseCase(&repository)
-		want := repository.GetTodoList()
+		want := repository.GetTodoList(map[TodoSortedColumn]OrderBy{})
 		act := PrepareTodoHandler(useCase)
 
 		// act
