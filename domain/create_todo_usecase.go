@@ -1,14 +1,14 @@
-package todo
+package domain
 
 import "time"
 
 type CreateTodoRequest struct {
-	Id          string
-	Title       string
-	Description string
-	CreatedAt   string
-	Image       string
-	Status      Status
+	Id          string `json:"id"`
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	CreatedAt   string `json:"created_at"`
+	Image       string `json:"image"`
+	Status      Status `json:"status"`
 }
 type CreateTodoUseCase struct {
 	repository TodoRepository

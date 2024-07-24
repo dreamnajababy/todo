@@ -1,4 +1,4 @@
-package todo
+package domain
 
 import (
 	"encoding/base64"
@@ -16,12 +16,12 @@ const (
 )
 
 type Todo struct {
-	Id          uuid.UUID
-	Title       string
-	Description string
-	CreatedAt   time.Time
-	Image       string
-	Status      Status
+	Id          uuid.UUID `json:"id"`
+	Title       string    `json:"title"`
+	Description string    `json:"description"`
+	CreatedAt   time.Time `json:"createdAt"`
+	Image       string    `json:"image"`
+	Status      Status    `json:"status"`
 }
 
 type ByTitleAsc []Todo
